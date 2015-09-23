@@ -1,0 +1,1354 @@
+============================================================
+接口请求统一地址 ：http://goodpenyou.com/api/index.php
+post传参   
+status 接口状态 1成功  其他失败  
+msg状态描述 成功 失败  其他
+data 返回的数据
+total  需要数据总条数的是总条数，其他默认1条
+
+另外：图片地址http://goodpenyou.com/static/images/图片名称
+     视频地址http://goodpenyou.com/static/video/视频名称
+=============================================================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+————————————————————————————————————————————————————————————————————————————————————————————————————------
+验证安全性 额外传一个参数 token ：规则 md5(md5('haopenyou'.$times.'$%#*').'apppassword')//$times格式2015-07-07 
+————————————————————————————————————————————————————————————————————————————————————————————————————------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1.登录
+    method:login
+    user:传用户名
+    pass:传密码
+   
+  返回值：
+{
+    "status": 1,
+    "msg": "ok",
+    "data": {
+        "user_id": "12",
+        "nick_name": "t",
+        "phone": "15801682517",
+        "status": "0",
+        "create_time": "0",
+        "identifier": "yy",
+        "mechine_type": "iOS",
+        "head_pic": null,
+        "ischeck": "1"
+    }
+}
+
+2.发送验证码
+
+    method:sendMessage
+    phone:手机号
+    flag：那个业务发短信  //1为注册发短信，2为找回密码发短信，如果还有咱们再加
+    返回值：
+    {
+        "status":"1",
+        "msg":"ok",
+        "data":[]
+    }
+    
+ 3.用户注册
+
+	method:register
+    phone:手机号
+    code:
+    返回值：
+    {
+        "status":"1",
+        "msg":"ok",
+        "data":[]
+    }
+
+ 4.修改密码 验证验证码
+    method:checkCode
+    phone : 手机号
+    code  : 验证码
+    
+    返回值：
+    {
+        "status":"1",
+        "msg":"ok",
+        "data":[]
+    }
+ 
+ 5.修改密码
+	
+	method:passChange
+	phone   :手机号
+    pass    : 第一次输入的密码
+    返回值：
+    {
+        "status":"1",
+        "msg":"ok",
+        "data":[]
+    }
+
+ 6.加好友
+	method:addFriend
+    myid : 加好友主动方ID
+    fid : 好友ID
+    返回值：
+    {
+        "status":"1",
+        "msg":"ok",
+        "data":[]
+    }
+ 
+ 7.获取朋友列表
+    method:getFriends
+    uid : 我的UserID 可以传13  13有数据
+    field：不传按好友关注数倒叙排列好友，传penNum按好友的视频最大喷数倒叙排列
+    返回值：
+    
+    {
+    "status": "1",
+    "msg": "ok",
+    "data": [
+        {
+            "friends_id": "12",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "iOS",
+            "source": "0",
+            "phone": "15801682517",
+            "nick_name": "柒亲萌货",
+            "slogan": "",
+            "gender": "1",
+            "penNum": "2",--------------------最大噴数
+            "video_id": "1",------------------最大噴数的视频ID
+            "focusNum": "4" ------------------好友数 （关注数）
+        },
+        {
+            "friends_id": "15",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "",
+            "source": "0",
+            "phone": "",
+            "nick_name": "哈哈",
+            "slogan": "",
+            "gender": "1",
+            "penNum": "0",
+            "video_id": "",
+            "focusNum": "3"
+        },
+        
+    ],
+    "total": "1"
+}
+    
+
+ 8.视频入库
+ 	method：addVideo
+    uid : 上传人uid
+	name:视频名称,
+	video_address：视频地址,
+	video_desc，视频描述,
+	video_area，视频属于哪个地区,
+	video_owner，视频上传者昵称,
+    返回值：
+    {
+        "status":"1",
+        "msg":"ok",
+        "data":[]
+    }
+ 
+ 9.获取我的视频列表
+	method:getMyVideo
+    uid : 我的userID
+    field：字段
+	orderby：默认按field字段asc排序,desc按field字段倒叙排序
+	length: 默认10条
+	bepose：从第几条开始取 默认0开始
+    返回值：
+    {
+	    "status": "1",
+	    "msg": "ok",
+	    "data": [
+	        {
+	            "id": "13",
+	            "name": null,
+	            "video_address": "/data/wor",
+	            "video_desc": null,
+	            "video_area": null,
+	            "video_owner": "Major",
+	            "owner_id": "12",
+	            "create_time": null,
+	            "update_time": null,
+	            "status": "0"
+	        },
+	        
+	    ],
+	    "total": "13"
+	}
+    
+    
+ 10.获取通讯录好友的状态
+ 	传入值：
+ 		 method：getMailListStatus
+ 		 phone:'15801682517,15801682518'
+ 	返回值：
+ 	{
+	    "status": "1",
+	    "msg": "ok",
+	    "data": {
+	        "15801682517",
+	        "15555555555"
+	    },
+	    "total": ""
+	}
+ 
+ 11 根据视频ID获取视频详情
+   method：getVideoDeatail
+   vid   : 视频ID
+   返回值
+   {
+	    "status": "1",
+	    "msg": "ok",
+	    "data": {
+	        "id": "1",
+	        "name": "shipinmingcheng",
+	        "video_address": "/data/work",
+	        "video_desc": "shipinmiaoshu",
+	        "video_area": "beijing",
+	        "video_owner": "Major",
+	        "owner_id": "12",
+	        "create_time": null,
+	        "update_time": null,
+	        "status": "0"
+	    },
+	    "total": null
+	}
+	
+  12.根据用户ID获取用户信息
+  
+  method:getUser
+  uid:用户ID
+  
+  返回值：
+  {
+    "status": "1",
+    "msg": "ok",
+    "data": {
+        "user_id": "12",
+        "nick_name": "t",
+        "phone": "15801682517",
+        "status": "0",
+        "create_time": "0",
+        "identifier": "yy",
+        "mechine_type": "iOS",
+        "head_pic": null,
+        "ischeck": "1"
+    },
+    "total": 1
+ }
+ 
+ 13.根据视频ID获取评论总数和分页评论内容
+  
+  method:getVideoComment
+  vid:视频ID
+  field：字段
+  orderby：默认按field字段asc排序,desc按field字段倒叙排序
+  length: 默认10条
+  bepose：从第几条开始取 默认0开始
+  返回值
+  {
+    "status": "1",
+    "msg": "ok",
+    "data": [
+        {
+            "CommentId": "1",
+            "userId": "12",
+            "commentDate": "2015-07-04 14:24:51",
+            "content": "this is a good video",
+            "videoId": "1"
+        }
+    ],
+    "total": "1"
+}
+   
+ 	
+ 14 根据视频ID获取关注此视频的人数
+ 
+ 	method:getVideoFocus
+  	vid:视频ID
+ 	返回值
+ 	{
+	    "status": "1",
+	    "msg": "ok",
+	    "data": {
+	        "nums": "1"
+	    },
+	    "total": 1
+	}
+	
+15.获取黑名单列表
+    method:getBlackList
+    uid : 我的UserID  可以传13  13有数据
+    
+    返回值：
+{
+    "status": "1",
+    "msg": "ok",
+    "data": {
+        "from_id": "13",
+        "to_id": "12",
+        "create_time": "1435816980",
+        "update_time": "1435816980"
+        ....
+        ....
+    }
+} 
+
+16.把好友加入黑名单
+    method:addToBlack
+    myid : 主动方 ID
+    fid : 好友ID
+    
+    返回值：
+    {
+        "status":"1",
+        "msg":"ok",
+        "data":[]
+    }
+17 从黑名单中删除   
+    method:removeBlack
+    myid : 主动方ID
+    fid : 黑名单好友ID
+    
+    返回值：
+    {
+        "status":"1",
+        "msg":"ok",
+        "data":[]
+    }
+
+ 18.第三方登录
+    method：otherLogin
+    nick_name:''昵称
+    source：0 手机   1 QQ 2微信，3微博
+    head_pic:头像地址
+    province_id:省份ID  可根据
+    identifier：key
+  
+  
+  19 获取省份列表
+  method：getProviceList
+  返回值  
+  {
+    "status": "1",
+    "msg": "ok",
+    "data": [
+        {
+            "ProvinceID": "1",
+            "ProvinceName": "北京市",
+            "DateCreated": "",
+            "DateUpdated": ""
+        }
+    ],
+    "total": "1"
+    }
+    
+   20 根据省份ID获取城市列表
+   method:getCityList
+   pid 省份ID
+   返回值
+   [
+    {
+        "CityID": "14",
+        "CityName": "太原市",
+        "ZipCode": "030000",
+        "ProvinceID": "4",
+        "DateCreated": "",
+        "DateUpdated": ""
+    }
+   ]
+    21 根据省份ID获取城市列表
+   method:getZoneList
+   cid 城市ID
+   返回值
+   [
+    {
+        "CityID": "1111",
+        "CityName": "定州",
+        "ZipCode": "030000",
+        "ProvinceID": "4",
+        "DateCreated": "",
+        "DateUpdated": ""
+    }
+   ]
+   
+   22根据省份名称获取省份信息
+   method：getProvinceInfo
+   name：
+   返回值
+   {
+    "status": "1",
+    "msg": "ok",
+    "data": {
+        "ProvinceID": "1",
+        "ProvinceName": "北京市",
+        "DateCreated": "",
+        "DateUpdated": ""
+    },
+    "total": "1"
+    }
+    
+    23.修改用户信息（不修改哪个参数一定不要传哪个参数 ）
+    method：improveUserInfo 修改用户信息
+    uid:必传  用户ID
+    nick_name:好喷友  修改用户昵称传这个参数  不修改昵称不传这个参数
+    head_pic:修改用户头像传这个参数，不修改不传
+    slogan：修改用户签名传这个参数，不修改不传
+    gender:修改用户性别传这个参数  1为男  2为 女  不修改不传
+    backgroud:修改背景
+    
+    返回值：
+    {"status":"1","msg":"修改用户信息成功","data":[],"total":"1"}
+    
+    24.获取视频评论
+    method:getCommentList
+    vid:1视频ID 传1  有值
+    返回值
+{
+    "status": "1",
+    "msg": "ok",
+    "data": [
+        {
+            "CommentId": "1",
+            "userId": "12",
+            "commentDate": "2015-07-04 14:24:51",
+            "content": "this is a good video",
+            "videoId": "1",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "iOS",
+            "source": "0",
+            "phone": "15801682517",
+            "nick_name": "柒亲萌货",
+            "slogan": "",
+            "gender": "1"
+        },
+        {
+            "CommentId": "2",
+            "userId": "5",
+            "commentDate": "2015-07-04 14:24:51",
+            "content": "这是一个很厉害的视频",
+            "videoId": "1",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "android",
+            "source": "3",
+            "phone": "",
+            "nick_name": "宇航",
+            "slogan": "",
+            "gender": "1"
+        }
+    ],
+    "total": "1"
+}
+   
+   25.搜索视频
+    method:searchVideoList
+    name : 视频名称//输入“搞基”
+    返回值：
+    {
+    "status": "1",
+    "msg": "ok",
+    "data": [
+        {
+            "id": "12",
+            "name": "程宇航和武杰搞基",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "beijing",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "iOS",
+            "source": "0",
+            "phone": "15801682517",
+            "nick_name": "柒亲萌货",
+            "slogan": "",
+            "gender": "1"
+        },
+        {
+            "id": "13",
+            "name": "搞基视频",
+            "video_address": "/data/wor",
+            "video_desc": "视频描述",
+            "video_area": "北京",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "iOS",
+            "source": "0",
+            "phone": "15801682517",
+            "nick_name": "柒亲萌货",
+            "slogan": "",
+            "gender": "1"
+        }
+    ],
+    "total": "1"
+}
+
+    26 评论视频
+    method：commentVideo
+    uid：
+    vid：
+    content：
+    返回值
+   {
+    "status": "1",
+    "msg": "评论成功",
+    "data": [],
+    "total": "1"
+    }
+    
+    27 获取“有料”视频图片及二级类目信息
+    method：getYouLiaoInfo
+    返回值
+   {
+    "status": "1",
+    "msg": "ok",
+    "data": {
+        "cate": [
+            {
+                "id": "4",
+                "catename": "精选",
+                "parent_id": "1",
+                "status": "1"
+            },
+            {
+                "id": "5",
+                "catename": "热门",
+                "parent_id": "1",
+                "status": "1"
+            },
+            
+        ],
+        "pic": {
+            "id": "1",
+            "cate_id": "1",
+            "img_one": "head.jpg",
+            "img_two": "head2.jpg",
+            "img_three": "head3.jpg",
+            "cretate_time": "",
+            "status": "1"
+        }
+    },
+    "total": "1"
+}
+   28  获取首页点进去的二级页视频列表
+   method getErjiInfo
+   bepose：0
+   length：10
+   返回值
+   {
+    "status": "1",
+    "msg": "ok",
+    "data": [
+        {
+            "id": "1",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "beijing",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0"
+        },
+        {
+            "id": "2",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "beijing",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0"
+        },
+    ],
+    "total": "13"
+}
+   
+   29  获取同城数据
+   method：getTongchengInfo
+   video_area:北京
+   bepose：0
+   length：10
+   返回值
+   {
+    "status": "1",
+    "msg": "ok",
+    "data": [
+        {
+            "id": "1",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "2",
+            "pinglunNum": "10",
+            "isfocus": "0"
+        },
+        {
+            "id": "2",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "1",
+            "pinglunNum": "2",
+            "isfocus": "0"
+        },
+        {
+            "id": "3",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "4",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "5",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "6",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "7",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "8",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "9",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "10",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        }
+    ],
+    "total": "13"
+}
+ 30，获取朋友圈视频
+    method:getFriendArea
+    uid:13
+    bepose:
+    length:
+    返回值
+    {
+    "status": "1",
+    "msg": "ok",
+    "data": [
+        {
+            "friends_id": "12",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "iOS",
+            "source": "0",
+            "phone": "15801682517",
+            "nick_name": "penNum",
+            "slogan": "",
+            "gender": "1",
+            "to_id": "12",
+            "videoInfo": {
+                "id": "1",
+                "name": "shipinmingcheng",
+                "video_address": "/data/work",
+                "video_desc": "shipinmiaoshu",
+                "video_area": "åŒ—äº¬",
+                "video_owner": "Major",
+                "owner_id": "12",
+                "create_time": "",
+                "update_time": "",
+                "status": "0",
+                "pinlunNum": "10",--------评论数
+                "penNum": "2"     --------噴数
+            },
+            "commentInfo": [
+                {
+                    "CommentId": "1",
+                    "userId": "12",
+                    "commentDate": "2015-07-04 14:24:51",
+                    "content": "this is a good video",
+                    "videoId": "1"
+                },
+                {
+                    "CommentId": "2",
+                    "userId": "5",
+                    "commentDate": "2015-07-04 14:24:51",
+                    "content": "è¿™æ˜¯ä¸€ä¸ªå¾ˆåŽ‰å®³çš„è§†é¢‘",
+                    "videoId": "1"
+                },
+                {
+                    "CommentId": "5",
+                    "userId": "45",
+                    "commentDate": "2015-07-24 14:40:59",
+                    "content": "è¿˜å¾ˆç²¾ç¥ž",
+                    "videoId": "1"
+                }
+            ]
+        },
+        {
+            "friends_id": "3",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "iOS",
+            "source": "0",
+            "phone": "",
+            "nick_name": "ceshi",
+            "slogan": "",
+            "gender": "1",
+            "to_id": "3",
+            "videoInfo": "",
+            "commentInfo": [
+                ""
+            ]
+        },
+        {
+            "friends_id": "5",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "android",
+            "source": "3",
+            "phone": "",
+            "nick_name": "å®‡èˆª",
+            "slogan": "",
+            "gender": "1",
+            "to_id": "5",
+            "videoInfo": "",
+            "commentInfo": [
+                ""
+            ]
+        },
+        {
+            "friends_id": "14",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "",
+            "source": "0",
+            "phone": "",
+            "nick_name": "å“ˆå“ˆ",
+            "slogan": "",
+            "gender": "1",
+            "to_id": "14",
+            "videoInfo": "",
+            "commentInfo": [
+                ""
+            ]
+        },
+        {
+            "friends_id": "15",
+            "head_pic": "head.jpg",
+            "backgroud": "backgroud.jpg",
+            "mechine_type": "",
+            "source": "0",
+            "phone": "",
+            "nick_name": "å“ˆå“ˆ",
+            "slogan": "",
+            "gender": "1",
+            "to_id": "15",
+            "videoInfo": "",
+            "commentInfo": [
+                ""
+            ]
+        }
+    ],
+    "total": "1"
+}
+   
+   31，图片上传（上传图片名称暂时只支持jpg  名称写死temp.jpg  以后扩展暂时先走通功能）
+   调取地址：http://goodpenyou.com/api/image_upload.php
+   参数
+   uid:
+   type:修改头像传1  修改其他暂时还没提供
+   返回
+   {
+    imagepath = "upload_image/2015/07/28/748bfd255c204a580dbc02952fcdb28f.jpg";
+    success = 1;
+    viewpath = "upload_image/2015/07/28/748bfd255c204a580dbc02952fcdb28f.jpg";
+    }
+    
+    
+    32获取发现视频列表
+   method getFaxianInfo
+   video_area:北京
+   uid:我的userid
+   bepose：0
+   length：10
+   返回值
+   {
+    "status": "1",
+    "msg": "ok",
+    "data": [
+        {
+            "id": "1",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "2",
+            "pinglunNum": "10",
+            "isfocus": "0"
+        },
+        {
+            "id": "2",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "1",
+            "pinglunNum": "2",
+            "isfocus": "0"
+        },
+        {
+            "id": "3",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "4",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "5",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "6",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "7",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "8",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "9",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        },
+        {
+            "id": "10",
+            "name": "shipinmingcheng",
+            "video_address": "/data/work",
+            "video_desc": "shipinmiaoshu",
+            "video_area": "åŒ—äº¬",
+            "video_owner": "Major",
+            "owner_id": "12",
+            "create_time": "",
+            "update_time": "",
+            "status": "0",
+            "ownerInfo": {
+                "user_id": "12",
+                "nick_name": "penNum",
+                "phone": "15801682517",
+                "status": "0",
+                "create_time": "0",
+                "identifier": "yy",
+                "mechine_type": "iOS",
+                "head_pic": "head.jpg",
+                "backgroud": "backgroud.jpg",
+                "ischeck": "1",
+                "slogan": "",
+                "nums": "1"
+            },
+            "penNum": "0",
+            "pinglunNum": "0",
+            "isfocus": "0"
+        }
+    ],
+    "total": "13"
+}
+   34关注视频
+  method：followVideo 
+   uid 用户ID
+   vid 视频ID
+   返回值:
+   {
+    "status": "1",
+    "msg": "点赞成功",
+    "data": [],
+    "total": "1"
+}
+   
+   
+   
+   
+   
+   
+   
+    
+   
