@@ -1,10 +1,11 @@
 <?php
-require_once 'common.php';
+error_reporting(0);
+require_once './common.php';
 require_once './tools/tools.class.php';
 header('Content-type:text/json');
 //获取数据
 $arrParam = $_POST;
-// $arrParam['method'] = 'followVideo';
+// $arrParam['method'] = 'getYouLiaoInfo';
 // $arrParam['uid']  = '13';
 // $arrParam['vid']  =1;
 // $arrParam['length']  = 10;
