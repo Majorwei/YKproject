@@ -36,11 +36,8 @@ class Video
             $r1      = $this->objMysql->fetch_assoc($q1);
             $result[$key]['pinNum'] = $r1['pinNum'];
         }
-        if(!empty($result) ){
-           return array( 'status'=>'1','msg'=>'ok','data'=>$result ,'total'=>$numRes['total']);
-        }else{
-            return $arrRet;
-        }
+        return array( 'status'=>'1','msg'=>'ok','data'=>$result ,'total'=>$numRes['total']);
+
         
         
     }
@@ -66,12 +63,7 @@ class Video
         $strSql = "select * from YK_Video where id=".$arrParam['vid'];
         $q      = $this->objMysql->query($strSql);
         $result = $this->objMysql->fetch_assoc($q);
-        if($result){
-            return array( 'status'=>'1','msg'=>'ok','data'=>$result );
-        }else{
-            return $arrRet;
-        }
-        
+        return array( 'status'=>'1','msg'=>'ok','data'=>$result );
     }
     
     /**
@@ -93,12 +85,7 @@ class Video
         while ( !! $res = $this->objMysql->fetch_assoc($q) ){
             $result[] = $res;
         }
-        
-        if($result){
-            return array( 'status'=>'1','msg'=>'ok','data'=>$result ,'total'=>$numRes['total']);
-        }else{
-            return $arrRet;
-        }
+        return array( 'status'=>'1','msg'=>'ok','data'=>$result ,'total'=>$numRes['total']);
     }
     
     /**
@@ -109,11 +96,7 @@ class Video
         $numSql = "select count(*) as nums from YK_VideoFocus where video_id=".$arrParam['vid'];
         $numq   = $this->objMysql->query($numSql);
         $numRes = $this->objMysql->fetch_assoc($numq);
-        if($numRes ){
-            return array( 'status'=>'1','msg'=>'ok','data'=>$numRes ,'total'=>$numRes['total']);
-        }else{
-            return $arrRet;
-        }
+        return array( 'status'=>'1','msg'=>'ok','data'=>$numRes ,'total'=>$numRes['total']);
     }
     
     /**
@@ -126,11 +109,7 @@ class Video
         while( !!$numRes = $this->objMysql->fetch_assoc($numq)){
             $ret[] = $numRes;
         }
-        if( $ret ){
-            return array( 'status'=>'1','msg'=>'ok','data'=>$ret);
-        }else{
-            return $arrRet;
-        }
+        return array( 'status'=>'1','msg'=>'ok','data'=>$ret);
     }
     
     /**
@@ -143,11 +122,7 @@ class Video
         while( !!$numRes = $this->objMysql->fetch_assoc($numq)){
             $ret[] = $numRes;
         }
-        if( $ret ){
-            return array( 'status'=>'1','msg'=>'ok','data'=>$ret);
-        }else{
-            return $arrRet;
-        }
+        return array( 'status'=>'1','msg'=>'ok','data'=>$ret);
     }
     
     /**

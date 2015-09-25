@@ -5,8 +5,8 @@ require_once './tools/tools.class.php';
 header('Content-type:text/json');
 //获取数据
 $arrParam = $_POST;
-// $arrParam['method'] = 'getYouLiaoInfo';
-// $arrParam['uid']  = '13';
+// $arrParam['method'] = 'getMyVideo';
+// $arrParam['uid']  = '45';
 // $arrParam['vid']  =1;
 // $arrParam['length']  = 10;
 // $arrParam['content']        = '好视频';

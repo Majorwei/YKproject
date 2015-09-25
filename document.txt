@@ -155,33 +155,50 @@ total  需要数据总条数的是总条数，其他默认1条
     }
  
  9.获取我的视频列表
-	method:getMyVideo
-    uid : 我的userID
-    field：字段
-	orderby：默认按field字段asc排序,desc按field字段倒叙排序
-	length: 默认10条
-	bepose：从第几条开始取 默认0开始
+	必须-method:getMyVideo
+          必须-uid : 我的userID  
+     不必须-field：字段  
+     不必须-orderby：默认按field字段asc排序,desc按field字段倒叙排序
+     不必须-length: 每页条数，默认10条
+     不必须-bepose：页码  默认1
     返回值：
     {
-	    "status": "1",
-	    "msg": "ok",
-	    "data": [
-	        {
-	            "id": "13",
-	            "name": null,
-	            "video_address": "/data/wor",
-	            "video_desc": null,
-	            "video_area": null,
-	            "video_owner": "Major",
-	            "owner_id": "12",
-	            "create_time": null,
-	            "update_time": null,
-	            "status": "0"
-	        },
-	        
-	    ],
-	    "total": "13"
-	}
+    "status": "1",
+    "msg": "ok",
+    "data": [
+        {
+            "id": "50",
+            "video_name": "哈哈",
+            "video_address": "upload_image/2015/08/25/bc468d0089fe3f772fe16d406c34bef0.mp4",
+            "video_desc": "",
+            "video_area": "北京",
+            "cover": "upload_image/2015/08/25/2f34c77620435c1a1edc764206340360.jpg",
+            "video_type": "搞怪",
+            "owner_id": "45",
+            "create_time": "1437383989",
+            "update_time": "1441162400",
+            "status": "0",
+            "user_id": "45",
+            "nick_name": "尔尔",
+            "pass_word": "96e79218965eb72c92a549dd5a330112",
+            "phone": "15011390281",
+            "head_pic": "http://goodpenyou.com/api/upload_image/2015/08/04/e949c925572cd268d2260c88afc72277.jpg",
+            "backgroud": "backgroud.jpg",
+            "token": "",
+            "source": "0",
+            "identifier": "",
+            "mechine_type": "",
+            "slogan": "即将举行",
+            "province_name": "2",
+            "ischeck": "0",
+            "gender": "1",
+            "penNum": "0",
+            "pinNum": "0"
+        },
+       
+    ],
+    "total": "17"
+}
     
     
  10.获取通讯录好友的状态
@@ -227,23 +244,27 @@ total  需要数据总条数的是总条数，其他默认1条
   uid:用户ID
   
   返回值：
-  {
+{
     "status": "1",
     "msg": "ok",
     "data": {
-        "user_id": "12",
-        "nick_name": "t",
-        "phone": "15801682517",
+        "user_id": "13",
+        "nick_name": "哈哈",
+        "phone": "15555555555",
         "status": "0",
         "create_time": "0",
-        "identifier": "yy",
-        "mechine_type": "iOS",
-        "head_pic": null,
-        "ischeck": "1"
+        "identifier": "",
+        "mechine_type": "",
+        "head_pic": "head.jpg",
+        "backgroud": "backgroud.jpg",
+        "ischeck": "0",
+        "slogan": "签名测试",
+        "gender": "1",
+        "fNum": "5",
+        "vNum": "0"
     },
-    "total": 1
- }
- 
+    "total": "1"
+} 
  13.根据视频ID获取评论总数和分页评论内容
   
   method:getVideoComment

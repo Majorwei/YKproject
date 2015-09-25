@@ -3,3 +3,8 @@ upload_image/
 .gitignore
 .project
 document.txt
+.buildpath
+ettings/org.eclipse.php.core.prefs
+ettings/org.eclipse.wst.common.project.facet.core.xml
+.gitignore
+

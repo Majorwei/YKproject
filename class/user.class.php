@@ -17,9 +17,15 @@ class User
     public function login($arrParam){
         /* $arrParam['phone'] = '15801682517';
         $arrParam['pass']  = '1';  */
-        $arrRet = array( 'status'=>'-1','msg'=>'对不起，请求失败','data'=>array() );
+        $arrRet = array( 'status'=>'-1','msg'=>'账号和密码不匹配，请重新登录','data'=>array() );
         if( empty($arrParam['user']) || empty($arrParam['pass']) ){
             return $arrRet;exit;
+        }
+        $strSql1 = "SELECT user_id,nick_name,phone,status,source create_time,identifier,mechine_type,head_pic,slogan,gender,ischeck FROM YK_User where phone= ".$arrParam['user'];
+        $q1      = $this->objMysql->query($strSql1);
+        $result1 = $this->objMysql->fetch_assoc($q1);
+        if(empty($result1)){
+        	return array( "status"=>"-1","msg"=>"对不起，此帐号不存在","data"=>$result); exit;
         }
         $strSql = "SELECT user_id,nick_name,phone,status,source create_time,identifier,mechine_type,head_pic,slogan,gender,ischeck FROM YK_User where phone='".$arrParam['user']."' and pass_word='".$arrParam['pass']."'";   
         $q      = $this->objMysql->query($strSql);
@@ -327,7 +333,17 @@ class User
         $strSql = "SELECT user_id,nick_name,phone,status,source create_time,identifier,mechine_type,head_pic,backgroud,ischeck,slogan,gender FROM YK_User where user_id=".$arrParam['uid'];
         $q      = $this->objMysql->query($strSql);
         $result = $this->objMysql->fetch_assoc($q);
+        
+        $strSql1 = "SELECT count(*) as fNum FROM YK_Friend where from_id=".$arrParam['uid'];
+        $q1      = $this->objMysql->query($strSql1);
+        $result1 = $this->objMysql->fetch_assoc($q1);
+        
+        $strSql2 = "SELECT count(*) as vNum FROM YK_Video where owner_id=".$arrParam['uid'];
+        $q2      = $this->objMysql->query($strSql2);
+        $result2 = $this->objMysql->fetch_assoc($q2);
         if( $result ){
+        	$result['fNum'] = $result1['fNum'];
+        	$result['vNum'] = $result2['vNum'];
             return array('status'=>'1','msg'=>'ok',"data"=>$result); exit;
         }else{
             return $arrRet;
