@@ -60,7 +60,7 @@ return $arrMethod = array
     "getFaxianInfo"     => "Cate",
     "getTongchengInfo"  => "Cate",
     "getFriendArea"     => "Cate",
-	"getAppInfo"        => "App",
+	"getAppInfo"        => "App"
 );
 
 

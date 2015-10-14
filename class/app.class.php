@@ -1,5 +1,5 @@
 <?php
-class Area
+class App
 {
     private $objMysql;
     public $objMsg;
@@ -12,8 +12,9 @@ class Area
     /**
      * 获取app状态
      */
-    public function getAppInfo( $appid = 1 ){
-    	$strSql = "select * from YK_App where id=$appid ";
+    public function getAppInfo( $arrParam ){
+    	$arrParam['appid'] = isset( $arrParam['appid'])?$arrParam['appid']:1;
+    	$strSql = "select * from YK_App where id= '".$arrParam['appid']."'";
     	$q      = $this->objMysql->query($strSql);
     	$result = $this->objMysql->fetch_assoc($q);
     	if ($result !== false ){
