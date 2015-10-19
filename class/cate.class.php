@@ -79,7 +79,7 @@ class Cate
         if( $arrParam['uid'] == 0 ){
             return array('status'=>'-1','msg'=>'参数错误',"data"=>$ret); exit;
         }
-        $strSql = "select * from YK_Video where video_area='".$arrParam['video_area']."' and owner_id != '".$arrParam['uid']."' order by  create_time limit ".$arrParam['bepose'].",".$arrParam['length'];
+        $strSql = "select * from YK_Video where video_area like '%".$arrParam['video_area']."%' and owner_id != '".$arrParam['uid']."' order by  create_time limit ".$arrParam['bepose'].",".$arrParam['length'];
         $q      = $this->objMysql->query($strSql);
         while ( !! $result = $this->objMysql->fetch_assoc($q) ){
             $ret[] = $result;
@@ -168,7 +168,7 @@ class Cate
         $arrParam['bepose'] = isset($arrParam['bepose'])?$arrParam['bepose']:0;
         $arrParam['bepose'] = $arrParam['bepose']*10;
         $arrParam['length'] = isset($arrParam['length'])?$arrParam['length']:10;
-        $strSql = "select B.* from YK_Videosort A left join YK_Video B  on A.video_id = B.id where A.cate_id=2 limit ".$arrParam['bepose'].",".$arrParam['length'];
+        $strSql = "select B.* from YK_Videosort A left join YK_Video B  on A.video_id = B.id and B.video_area like '%".$arrParam['video_area']."%' where A.cate_id=2 limit ".$arrParam['bepose'].",".$arrParam['length'];
         $q      = $this->objMysql->query($strSql);
         while ( !! $result = $this->objMysql->fetch_assoc($q) ){
             $ret[] = $result;
