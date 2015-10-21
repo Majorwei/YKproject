@@ -2,17 +2,18 @@
 error_reporting(0);
 require_once './common.php';
 require_once './tools/tools.class.php';
-//header('Content-type:text/json');
+header('Content-type:text/json');
 //获取数据
 $arrParam = $_POST;
-$arrParam['method'] = 'getTongchengInfo';
-$arrParam['uid']  = '3';
-// $arrParam['vid']  =1;
+// $arrParam['method'] = 'getFaxianInfo';
+// $arrParam['uid']  = '2';
+// $arrParam['video_area']   = '北京';
 // $arrParam['length']  = 10;
-// $arrParam['content']        = '好视频';
+// $arrParam['bepose']  = 1;
+// $arrParam['vid']  =1;
 // $arrParam['pass']   = 'e9c78b115fdef2bddfee90c59d3a85ed';
 // $arrParam['head_pic']   = 'head.jpg';
-$arrParam['video_area']   = '上海';
+
 // $arrParam['identifier']   = '11111111111111111';
 
 //传过来的token  验证安全性

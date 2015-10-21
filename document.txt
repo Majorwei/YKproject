@@ -1051,8 +1051,6 @@ total  需要数据总条数的是总条数，其他默认1条
     
     32获取发现视频列表
    method getFaxianInfo
-   video_area:北京
-   uid:我的userid
    bepose：0
    length：10
    返回值

@@ -163,12 +163,12 @@ class Cate
         return array('status'=>'1','msg'=>'ok','data'=>$ret,'total'=>$resultTotal['total']); exit;
     }
     
-    public function getFaxianInfo(){
+    public function getFaxianInfo($arrParam){
         $arrRet = array( 'status'=>'-1','msg'=>'fail','data'=>array() );
         $arrParam['bepose'] = isset($arrParam['bepose'])?$arrParam['bepose']:0;
         $arrParam['bepose'] = $arrParam['bepose']*10;
         $arrParam['length'] = isset($arrParam['length'])?$arrParam['length']:10;
-        $strSql = "select B.* from YK_Videosort A left join YK_Video B  on A.video_id = B.id and B.video_area like '%".$arrParam['video_area']."%' where A.cate_id=2 limit ".$arrParam['bepose'].",".$arrParam['length'];
+        $strSql = "select B.* from YK_Videosort A left join YK_Video B  on A.video_id = B.id where  A.cate_id=2 limit ".$arrParam['bepose'].",".$arrParam['length'];
         $q      = $this->objMysql->query($strSql);
         while ( !! $result = $this->objMysql->fetch_assoc($q) ){
             $ret[] = $result;
